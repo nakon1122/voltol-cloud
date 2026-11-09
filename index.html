@@ -153,7 +153,8 @@
 
         <a id="dlIndexHtmlBtn" href="#" class="rounded-xl bg-amber-400 px-3 py-1.5 text-xs font-black text-slate-950 hover:bg-amber-300 transition">⬇️ ดาวน์โหลด index.html (สำหรับมือถือ)</a>
         <button id="quickPublicLinkBtn"  type="button" class="rounded-xl border border-teal-400/50 bg-teal-500/15 px-3 py-1.5 text-xs font-extrabold text-teal-300 hover:bg-teal-500/25 transition">🌐 ลิงก์สาธารณะ (Public Link)</button>
-        <button id="openAuthModalBtn" type="button" class="rounded-xl bg-emerald-500 px-3 py-1.5 text-xs font-black text-slate-950 hover:bg-emerald-400 transition">👤 <span id="hdrUserText">เข้าสู่ระบบ / สมัคร</span></button>
+        <a href="https://www.battlab.net/" aria-label="กลับหน้า BATTLAB Home" class="rounded-xl border border-slate-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-slate-800">⌂ Home</a>
+        <button id="openAuthModalBtn" type="button" class="rounded-xl bg-emerald-500 px-3 py-1.5 text-xs font-black text-slate-950 hover:bg-emerald-400 transition">👤 <span id="hdrUserText">เข้าสู่ระบบ</span></button>
         <button id="langBtn" type="button" class="rounded-xl border border-slate-700 bg-slate-800/80 px-2.5 py-1.5 text-xs font-bold text-slate-200 hover:bg-slate-700">TH / EN</button>
       </div>
     </div>
@@ -710,8 +711,8 @@
               <span class="rounded-md bg-emerald-500/20 px-2 py-0.5 text-[11px] font-bold text-emerald-300">NO EMAIL VERIFY</span>
               <span id="authStatePill" class="text-xs font-bold text-amber-400">Guest / Demo</span>
             </div>
-            <h3 class="mt-2 text-base font-extrabold text-white">👤 บัญชี VOLTOL Cloud (สมัครเข้าใช้ได้ทันที)</h3>
-            <p class="text-xs text-slate-400 mt-1">สมัครสมาชิกแล้วเข้าใช้งานได้เลยโดยไม่ต้องรอยืนยันอีเมล ผูกบอร์ด ESP32-S3 เข้ากับบัญชีอัตโนมัติ</p>
+            <h3 class="mt-2 text-base font-extrabold text-white">👤 บัญชี VOLTOL Cloud</h3>
+            <p class="text-xs text-slate-400 mt-1">เข้าสู่ระบบด้วยบัญชี BATTLAB เพื่อเชื่อมต่อบอร์ด ESP32-S3</p>
 
             <div id="inlineAuthForm" class="mt-3 space-y-2.5 text-xs">
               <label class="block">
@@ -728,10 +729,10 @@
           <div class="space-y-2">
             <div class="grid grid-cols-2 gap-2">
               <button id="btnSignIn" type="button" class="rounded-xl bg-emerald-500 py-2.5 text-xs font-black text-slate-950 hover:bg-emerald-400 transition">เข้าสู่ระบบ</button>
-              <button id="btnSignUpInstant" type="button" class="rounded-xl border border-emerald-500/50 bg-emerald-500/15 py-2.5 text-xs font-bold text-emerald-300 hover:bg-emerald-500/25 transition">สมัครสมาชิกทันที</button>
+              <a href="https://www.battlab.net/" class="rounded-xl border border-emerald-500/50 bg-emerald-500/15 py-2.5 text-center text-xs font-bold text-emerald-300 hover:bg-emerald-500/25 transition">สมัครที่ BATTLAB Home</a>
             </div>
             <button id="btnSignOut" type="button" class="hidden w-full rounded-xl border border-rose-500/40 bg-rose-500/15 py-2 text-xs font-bold text-rose-300">ออกจากระบบ</button>
-            <div id="authFeedback" class="text-[11px] text-slate-400">ฐานข้อมูลมี Trigger ยืนยันอีเมลอัตโนมัติ (Instant Auto-Confirm)</div>
+            <div id="authFeedback" class="text-[11px] text-slate-400">ใช้บัญชี BATTLAB เดิมเพื่อเข้าสู่ระบบ</div>
           </div>
         </div>
 
@@ -1688,7 +1689,7 @@
         document.getElementById('authEmailInput').focus();
       });
 
-      // Instant Sign-Up & Sign-In (No Email Confirmation Needed)
+      // Sign in with an existing BATTLAB account
       const getSbClient = () => {
         const url = document.getElementById('cfgCloudUrl').value.trim();
         const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpwc3hjZHprYXlxaHpiZGNkb2VkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM0NTMyODgsImV4cCI6MjEwOTAyOTI4OH0.aAXESY_MJ1IHlvF_8CVdVAGWdfz5ZM6ysoOki7kUv08';
@@ -1703,31 +1704,6 @@
         document.getElementById('btnSignOut').classList.remove('hidden');
         document.getElementById('authFeedback').textContent = 'เข้าสู่ระบบสำเร็จ พร้อมซิงค์และสั่งการระยะไกล';
       };
-
-      document.getElementById('btnSignUpInstant').addEventListener('click', async () => {
-        const email = document.getElementById('authEmailInput').value.trim();
-        const password = document.getElementById('authPassInput').value;
-        if (!email || password.length < 8) {
-          showToast('กรุณากรอกอีเมล และรหัสผ่านอย่างน้อย 8 ตัวอักษร');
-          return;
-        }
-        const sb = getSbClient();
-        if (sb) {
-          try {
-            const { data, error } = await sb.auth.signUp({ email, password });
-            if (error) {
-              showToast('สมัครไม่สำเร็จ: ' + error.message);
-              return;
-            }
-            if (!data.session) {
-              await sb.rpc('voltol_confirm_email', { p_email: email }).catch(() => {});
-              await sb.auth.signInWithPassword({ email, password }).catch(() => {});
-            }
-          } catch (e) {}
-        }
-        setLoggedInUser(email);
-        showToast('✅ สมัครสมาชิกและเข้าสู่ระบบทันทีโดยไม่ต้องยืนยันอีเมล!');
-      });
 
       document.getElementById('btnSignIn').addEventListener('click', async () => {
         const email = document.getElementById('authEmailInput').value.trim();
@@ -1750,7 +1726,7 @@
         const sb = getSbClient();
         if (sb) { try { await sb.auth.signOut(); } catch (e) {} }
         document.getElementById('authStatePill').textContent = 'Guest / Demo';
-        document.getElementById('hdrUserText').textContent = 'เข้าสู่ระบบ / สมัคร';
+        document.getElementById('hdrUserText').textContent = 'เข้าสู่ระบบ';
         document.getElementById('btnSignOut').classList.add('hidden');
         showToast('ออกจากระบบแล้ว');
       });
