@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="th" class="dark" data-tpl="carbon">
+<html lang="th" class="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -10,19 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Thai:wght@400;500;600;700;800&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Saira:wght@500;600;700;800&family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
-  <script>
-    // Web template (A carbon / B pitwall). Chosen by a super admin in the BATTLAB back office
-    // (Supabase site_settings.voltol_template); ?tpl=pitwall previews without changing it.
-    (function () {
-      var ok = { carbon: 1, pitwall: 1 }, t = 'carbon', q = null;
-      try { q = new URLSearchParams(location.search).get('tpl'); } catch (e) {}
-      try { var c = localStorage.getItem('voltol_tpl'); if (ok[c]) t = c; } catch (e) {}
-      if (ok[q]) t = q;
-      document.documentElement.setAttribute('data-tpl', t);
-      window.__tplPreview = ok[q] ? q : null;
-    })();
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #05080d;
@@ -123,116 +111,6 @@
       transform: translateY(-2px);
       border-color: rgba(0, 230, 153, 0.4) !important;
     }
-
-    /* =====================================================================
-       WEB TEMPLATES — html[data-tpl="carbon"] (A, main) / html[data-tpl="pitwall"] (B, backup)
-       Selected in the BATTLAB back office (super admin). Only colours, type,
-       shapes and motion change here: every element, id and handler stays the same.
-       ===================================================================== */
-    .tpl-ticks, .tpl-needle { display: none; }
-    .tpl-spark { display: none; width: 100%; height: 30px; margin-top: 6px; overflow: visible; }
-    .tpl-spark polyline { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
-    @keyframes tplRise { from { opacity: 0; transform: translateY(12px); } }
-    @keyframes tplSweep { from { transform: rotate(163.74deg); } }
-    @keyframes tplPulse { 50% { opacity: .35; } }
-    @media (prefers-reduced-motion: reduce) { html[data-tpl] * { animation: none !important; transition: none !important; } }
-
-    html[data-tpl] #cockpitThemeA path[stroke="#182232"] { stroke: #1D2025; }
-    html[data-tpl] #cockpitThemeA path[stroke="#111926"] { stroke: #16191D; }
-    html[data-tpl="carbon"] header .bg-emerald-500\/15 { background: var(--tA) !important; border-color: var(--tA) !important; color: #0B0C0E !important; }
-    html[data-tpl="pitwall"] header .bg-emerald-500\/15 { background: transparent !important; border-color: var(--tA) !important; color: var(--tA) !important; }
-    /* ---------------- A · Carbon Pro ---------------- */
-    html[data-tpl="carbon"] { --tA: #FFC400; --tA2: #FFD84D; --tBg: #0B0C0E; --tCard: #121418; --tLine: rgba(255,255,255,.07); --tMut: #8E97A3; --tTxt: #F2F4F7; }
-    html[data-tpl="carbon"] body {
-      background-color: var(--tBg) !important; color: var(--tTxt);
-      background-image: repeating-linear-gradient(45deg, rgba(255,255,255,.022) 0 2px, transparent 2px 5px),
-                        repeating-linear-gradient(-45deg, rgba(255,255,255,.014) 0 2px, transparent 2px 5px) !important;
-      background-size: auto !important;
-      font-family: 'IBM Plex Sans Thai', 'Noto Sans Thai', system-ui, sans-serif;
-      padding-bottom: 110px;
-    }
-    html[data-tpl="carbon"] .tabular, html[data-tpl="carbon"] .font-mono { font-family: 'Saira', 'IBM Plex Sans Thai', sans-serif; font-variant-numeric: tabular-nums; }
-    html[data-tpl="carbon"] .glass { background: rgba(11,12,14,.82); backdrop-filter: blur(14px); }
-    html[data-tpl="carbon"] header.glass { border-bottom-color: var(--tLine) !important; }
-    html[data-tpl="carbon"] .rounded-2xl {
-      border-radius: 24px !important; border-color: var(--tLine) !important;
-      background: var(--tCard) !important;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 18px 40px rgba(0,0,0,.35);
-      animation: tplRise .7s cubic-bezier(.2,.8,.2,1) both;
-    }
-    html[data-tpl="carbon"] main .rounded-2xl .rounded-2xl { box-shadow: none; background: #181A1F !important; }
-    html[data-tpl="carbon"] .rounded-xl { border-radius: 14px; }
-    html[data-tpl="carbon"] .border-slate-800, html[data-tpl="carbon"] .border-slate-800\/90, html[data-tpl="carbon"] .border-slate-800\/80, html[data-tpl="carbon"] .border-slate-700 { border-color: var(--tLine) !important; }
-    html[data-tpl="carbon"] .bg-slate-900\/70, html[data-tpl="carbon"] .bg-slate-900\/60, html[data-tpl="carbon"] .bg-slate-900\/75 { background: var(--tCard); }
-    html[data-tpl="carbon"] .bg-slate-900, html[data-tpl="carbon"] .bg-slate-950, html[data-tpl="carbon"] .bg-slate-800, html[data-tpl="carbon"] .bg-slate-800\/80 { background-color: #181A1F; }
-    html[data-tpl="carbon"] .text-slate-400 { color: var(--tMut); }
-    html[data-tpl="carbon"] .bg-emerald-500 { background-color: var(--tA) !important; color: #0B0C0E !important; }
-    html[data-tpl="carbon"] .bg-emerald-500:hover, html[data-tpl="carbon"] .hover\:bg-emerald-400:hover { background-color: var(--tA2) !important; }
-    html[data-tpl="carbon"] input[type="range"] { accent-color: var(--tA); }
-    html[data-tpl="carbon"] input { border-radius: 12px; }
-    /* hero gauge: needle, ticks, sweep on load */
-    html[data-tpl="carbon"] #cockpitThemeA svg { max-width: 420px; }
-    html[data-tpl="carbon"] .tpl-ticks { display: inline; }
-    html[data-tpl="carbon"] .tpl-needle { display: inline; fill: var(--tA); transform-origin: 160px 140px; transition: transform .25s cubic-bezier(.3,1.3,.5,1); animation: tplSweep 1.5s cubic-bezier(.3,1.4,.4,1) .2s both; }
-    html[data-tpl="carbon"] #arcSpeedPath { filter: none; }
-    html[data-tpl="carbon"] #svgRpmVal { fill: var(--tMut); }
-    html[data-tpl="carbon"] #arcAmpPath { stroke: var(--tA); }
-    html[data-tpl="carbon"] #dashGearBadge { color: var(--tA); }
-    html[data-tpl="carbon"] .tpl-spark { display: block; }
-    html[data-tpl="carbon"] #connDot { animation: tplPulse 1.6s ease-in-out infinite; }
-    /* bottom bar -> floating capsule dock */
-    html[data-tpl="carbon"] body > nav {
-      left: 50%; right: auto; bottom: 16px; transform: translateX(-50%);
-      width: min(600px, calc(100% - 24px)); border-radius: 999px; padding: 6px;
-      border: 1px solid rgba(255,255,255,.1) !important; background: rgba(22,24,29,.88);
-      box-shadow: 0 20px 40px rgba(0,0,0,.5);
-    }
-    html[data-tpl="carbon"] body > nav > div { max-width: none; }
-    html[data-tpl="carbon"] .nav-btn { border-radius: 999px !important; min-height: 44px; font-size: 12px; letter-spacing: .5px; color: #C9D0D8; }
-    html[data-tpl="carbon"] .nav-btn span.text-base { display: none; }
-    html[data-tpl="carbon"] .nav-btn.bg-emerald-500\/10 { background: var(--tA) !important; color: #0B0C0E !important; }
-
-    /* ---------------- B · Pit Wall ---------------- */
-    html[data-tpl="pitwall"] { --tA: #FF6A1A; --tA2: #FF8A3D; --tBg: #0C0E10; --tCard: #121417; --tLine: #23272D; --tMut: #8A939E; --tTxt: #E9EDF1; --tCy: #3CC8F0; }
-    html[data-tpl="pitwall"] body {
-      background-color: var(--tBg) !important; color: var(--tTxt);
-      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px) !important;
-      background-size: 32px 32px !important;
-      font-family: 'Chakra Petch', 'Noto Sans Thai', system-ui, sans-serif;
-    }
-    html[data-tpl="pitwall"] .tabular, html[data-tpl="pitwall"] .font-mono { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }
-    html[data-tpl="pitwall"] .glass { background: rgba(12,14,16,.92); backdrop-filter: blur(10px); }
-    html[data-tpl="pitwall"] .rounded-2xl, html[data-tpl="pitwall"] .rounded-xl { border-radius: 6px !important; }
-    html[data-tpl="pitwall"] .rounded-lg, html[data-tpl="pitwall"] .rounded-md { border-radius: 4px !important; }
-    html[data-tpl="pitwall"] .rounded-2xl { background: var(--tCard) !important; border-color: var(--tLine) !important; box-shadow: none; animation: tplRise .5s ease-out both; }
-    html[data-tpl="pitwall"] main .rounded-2xl .rounded-2xl { background: #15181C !important; }
-    html[data-tpl="pitwall"] .border-slate-800, html[data-tpl="pitwall"] .border-slate-800\/90, html[data-tpl="pitwall"] .border-slate-800\/80, html[data-tpl="pitwall"] .border-slate-700 { border-color: var(--tLine) !important; }
-    html[data-tpl="pitwall"] .bg-slate-900\/70, html[data-tpl="pitwall"] .bg-slate-900\/60, html[data-tpl="pitwall"] .bg-slate-900\/75 { background: var(--tCard); }
-    html[data-tpl="pitwall"] .bg-slate-900, html[data-tpl="pitwall"] .bg-slate-950, html[data-tpl="pitwall"] .bg-slate-800, html[data-tpl="pitwall"] .bg-slate-800\/80 { background-color: #171A1E; }
-    html[data-tpl="pitwall"] .text-slate-400 { color: var(--tMut); }
-    html[data-tpl="pitwall"] .uppercase, html[data-tpl="pitwall"] h3 { letter-spacing: 1.5px; }
-    html[data-tpl="pitwall"] .bg-emerald-500 { background-color: var(--tA) !important; color: #0C0E10 !important; }
-    html[data-tpl="pitwall"] .bg-emerald-500:hover, html[data-tpl="pitwall"] .hover\:bg-emerald-400:hover { background-color: var(--tA2) !important; }
-    html[data-tpl="pitwall"] input[type="range"] { accent-color: var(--tA); }
-    html[data-tpl="pitwall"] .tpl-ticks { display: inline; }
-    html[data-tpl="pitwall"] .tpl-needle { display: inline; fill: var(--tA); transform-origin: 160px 140px; transition: transform .15s linear; }
-    html[data-tpl="pitwall"] #arcSpeedPath { filter: none; }
-    html[data-tpl="pitwall"] #arcAmpPath { stroke: var(--tCy); }
-    html[data-tpl="pitwall"] #svgRpmVal { fill: var(--tCy); }
-    html[data-tpl="pitwall"] #dashGearBadge { color: var(--tA); }
-    html[data-tpl="pitwall"] .tpl-spark { display: block; }
-    html[data-tpl="pitwall"] #connDot { border-radius: 2px; animation: tplPulse 1.2s steps(2, start) infinite; }
-    html[data-tpl="pitwall"] .nav-btn span.text-base { display: none; }
-    html[data-tpl="pitwall"] .nav-btn { min-height: 44px; letter-spacing: 1px; }
-    html[data-tpl="pitwall"] .nav-btn.bg-emerald-500\/10 { background: rgba(255,106,26,.12) !important; color: var(--tTxt) !important; box-shadow: inset 0 0 0 1px var(--tA); }
-    /* desktop: bottom bar becomes the left rail */
-    @media (min-width: 1024px) {
-      html[data-tpl="pitwall"] body { padding-left: 212px; padding-bottom: 24px; }
-      html[data-tpl="pitwall"] body > nav { top: 0; bottom: 0; right: auto; width: 200px; border-top: 0 !important; border-right: 1px solid var(--tLine); padding: 88px 12px 16px; }
-      html[data-tpl="pitwall"] body > nav > div { display: flex; flex-direction: column; gap: 6px; max-width: none; }
-      html[data-tpl="pitwall"] body > nav::before { content: 'VOLTOL · PIT WALL'; position: absolute; top: 28px; left: 20px; font: 700 13px 'Chakra Petch', sans-serif; letter-spacing: 3px; color: var(--tTxt); }
-      html[data-tpl="pitwall"] .nav-btn { flex-direction: row !important; justify-content: flex-start !important; padding: 0 14px; font-size: 14px !important; }
-    }
   </style>
 </head>
 <body class="min-h-screen pb-24">
@@ -293,6 +171,27 @@
       <button id="exitPublicPreviewBtn" type="button" class="rounded-lg border border-teal-400/50 bg-teal-500/20 px-2.5 py-1 font-bold text-teal-200 hover:bg-teal-500/30 transition">
         กลับโหมดเจ้าของรถ (Owner Mode)
       </button>
+    </div>
+  </div>
+
+  <!-- Interactive UI & Motion Concept Switcher Banner (3 Selectable Styles) -->
+  <div class="border-b border-slate-800/80 bg-slate-950/90 px-4 py-2.5">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2 text-xs">
+        <span class="inline-flex h-6 w-6 items-center justify-center rounded-lg bg-amber-500/20 text-amber-400 font-bold">✨</span>
+        <span class="font-bold text-slate-200">เลือกดีไซน์ UI &amp; Motion (กดสลับดูได้ทันที แล้วแจ้งแบบที่ชอบได้เลยครับ):</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-1.5">
+        <button type="button" data-skin-select="1" class="skin-select-btn rounded-xl bg-rose-500 px-3 py-1.5 text-xs font-black text-white shadow-lg shadow-rose-500/20 transition">
+          🏎️ แบบที่ 1: F1 Carbon Telemetry (เรซซิ่ง ดุดัน)
+        </button>
+        <button type="button" data-skin-select="2" class="skin-select-btn rounded-xl border border-slate-700 bg-slate-900 px-3 py-1.5 text-xs font-bold text-slate-300 hover:text-white transition">
+          ⚡ แบบที่ 2: Cyber Neon Apex (นีออน सायเบอร์ HUD)
+        </button>
+        <button type="button" data-skin-select="3" class="skin-select-btn rounded-xl border border-slate-700 bg-slate-900 px-3 py-1.5 text-xs font-bold text-slate-300 hover:text-white transition">
+          💎 แบบที่ 3: Minimal Glass Studio (กระจกคลีนหรู)
+        </button>
+      </div>
     </div>
   </div>
 
@@ -382,9 +281,6 @@
               <!-- Inner Power/Current Bar Arc -->
               <path d="M 62 168 A 100 100 0 1 1 258 168" fill="none" stroke="#111926" stroke-width="7" stroke-linecap="round"/>
               <path id="arcAmpPath" d="M 62 168 A 100 100 0 1 1 258 168" fill="none" stroke="#38bdf8" stroke-width="7" stroke-linecap="round" stroke-dasharray="0 500" class="transition-all duration-150"/>
-              <!-- Template ticks + needle (shown by the templates' CSS) -->
-              <path class="tpl-ticks" d="M59.2 169.4L52.5 171.4M52.1 145.6L48.2 145.8M56.7 121.2L49.8 120.0M61.0 96.8L57.4 95.2M76.0 77.0L70.4 72.8M90.8 57.1L88.2 54.0M113.0 46.1L109.9 39.8M135.2 34.9L134.3 31.0M160.0 35.0L160.0 28.0M184.8 34.9L185.7 31.0M207.0 46.1L210.1 39.8M229.2 57.1L231.8 54.0M244.0 77.0L249.6 72.8M259.0 96.8L262.6 95.2M263.3 121.2L270.2 120.0M267.9 145.6L271.8 145.8M260.8 169.4L267.5 171.4" stroke="#4A515B" stroke-width="2" stroke-linecap="round" fill="none"/>
-              <g id="tplNeedle" class="tpl-needle" style="transform: rotate(163.74deg)"><path d="M254 136.5 L300 140 L254 143.5 Z"/></g>
               <!-- Speed Readout -->
               <text id="svgSpeedVal" x="160" y="128" text-anchor="middle" fill="#ffffff" font-size="68" font-weight="900" class="tabular">64</text>
               <text x="160" y="152" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="700" letter-spacing="2">KM/H</text>
@@ -1232,10 +1128,8 @@
       const ampFrac = Math.min(1, Math.max(0, Math.abs(state.amp) / maxAmp));
 
       // SVG Arc lengths (full sweep ~ 395px for speed, 314px for amp)
-      document.getElementById('arcSpeedPath').setAttribute('stroke-dasharray', `${(spdFrac * 463.6).toFixed(1)} 600`);
-      const tplN = document.getElementById('tplNeedle'); if (tplN) tplN.style.transform = `rotate(${(163.74 + 212.52 * spdFrac).toFixed(2)}deg)`;
-      if (window.tplTick) window.tplTick(state);
-      document.getElementById('arcAmpPath').setAttribute('stroke-dasharray', `${(ampFrac * 370.9).toFixed(1)} 500`);
+      document.getElementById('arcSpeedPath').setAttribute('stroke-dasharray', `${(spdFrac * 395).toFixed(1)} 600`);
+      document.getElementById('arcAmpPath').setAttribute('stroke-dasharray', `${(ampFrac * 314).toFixed(1)} 500`);
 
       const spdRound = Math.round(state.kmh);
       const rpmStr = Math.round(state.rpm).toLocaleString();
@@ -1525,7 +1419,7 @@
     // 5. Event Listeners & Interactive Controls
     // =========================================================================
     window.addEventListener('DOMContentLoaded', () => {
-      document.body.removeAttribute('data-skin');
+      document.body.setAttribute('data-skin', '1');
       document.querySelectorAll('.skin-select-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           const sk = btn.dataset.skinSelect;
@@ -2192,51 +2086,5 @@
       }, 250);
     });
   </script>
-<script>
-    // ===================== Web template runtime =====================
-    // Reads the active template from Supabase (public, read-only) and keeps a copy in
-    // localStorage so the next visit paints the right look straight away.
-    (function () {
-      var OK = { carbon: 1, pitwall: 1 };
-      function apply(t) { if (OK[t]) document.documentElement.setAttribute('data-tpl', t); }
-      if (!window.__tplPreview) {
-        fetch('https://zpsxcdzkayqhzbdcdoed.supabase.co/rest/v1/site_settings?key=eq.voltol_template&select=value', {
-          headers: { apikey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpwc3hjZHprYXlxaHpiZGNkb2VkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM0NTMyODgsImV4cCI6MjEwOTAyOTI4OH0.aAXESY_MJ1IHlvF_8CVdVAGWdfz5ZM6ysoOki7kUv08', Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpwc3hjZHprYXlxaHpiZGNkb2VkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM0NTMyODgsImV4cCI6MjEwOTAyOTI4OH0.aAXESY_MJ1IHlvF_8CVdVAGWdfz5ZM6ysoOki7kUv08' }
-        }).then(function (r) { return r.ok ? r.json() : []; }).then(function (rows) {
-          var t = rows && rows[0] && rows[0].value && rows[0].value.active;
-          if (OK[t]) { apply(t); try { localStorage.setItem('voltol_tpl', t); } catch (e) {} }
-        }).catch(function () {});
-      }
-
-      // Small trend lines under the live cards (last ~16 s)
-      var SP = [
-        { id: 'cardVolt', k: 'volt', c: '#2BD98B' }, { id: 'cardAmp', k: 'amp', c: 'var(--tA)' },
-        { id: 'cardKw', k: 'kw', c: '#5AB8FF' }, { id: 'cardCtrlTemp', k: 'ctrlTemp', c: '#2BD98B' },
-        { id: 'cardMotorTemp', k: 'motorTemp', c: '#FF7A2F' }
-      ], hist = {}, last = 0, N = 40;
-      function setup() {
-        SP.forEach(function (s) {
-          var el = document.getElementById(s.id), card = el && el.closest('.rounded-2xl');
-          if (!card || card.querySelector('.tpl-spark')) return;
-          var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-          svg.setAttribute('class', 'tpl-spark'); svg.setAttribute('viewBox', '0 0 100 30'); svg.setAttribute('preserveAspectRatio', 'none'); svg.setAttribute('aria-hidden', 'true');
-          var pl = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-          pl.style.stroke = s.c; svg.appendChild(pl); card.appendChild(svg); s.pl = pl; hist[s.k] = [];
-        });
-      }
-      window.tplTick = function (st) {
-        var now = Date.now(); if (now - last < 400) return; last = now;
-        if (!SP[0].pl) setup();
-        SP.forEach(function (s) {
-          if (!s.pl || typeof st[s.k] !== 'number' || !isFinite(st[s.k])) return;
-          var a = hist[s.k]; a.push(st[s.k]); if (a.length > N) a.shift();
-          if (a.length < 2) return;
-          var mn = Math.min.apply(null, a), mx = Math.max.apply(null, a), rg = (mx - mn) || 1;
-          s.pl.setAttribute('points', a.map(function (v, i) { return (i * 100 / (N - 1)).toFixed(1) + ',' + (27 - (v - mn) / rg * 24).toFixed(1); }).join(' '));
-        });
-      };
-      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setup); else setup();
-    })();
-</script>
 </body>
 </html>
